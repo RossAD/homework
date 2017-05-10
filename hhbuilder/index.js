@@ -1,13 +1,14 @@
+// Wrapper to send once document is loaded
 function run() {
+  // Hold current household state
   var household_array = [];
-  
+
   function removePerson (index, array) {
-    var result = array 
+    var result = array
     result.splice(index, 1);
-    console.log('new array: ', household_array)
     return result;
   }
-
+  // Update View
   function updateHousehold (array) {
     var updatedHouse = array;
     var el = document.querySelector("ol.household");
@@ -47,7 +48,7 @@ function run() {
     }
     return result;
   }
-  
+
   function addPerson (array) {
     var newHousehold = array;
     var newPersonObject = {};
@@ -65,10 +66,11 @@ function run() {
     relEl.value = "";
     return newHousehold;
   }
-
+  // Add click handler to Add button
   var addEl = document.querySelector("button.add");
   addEl.addEventListener("click", function(e) {
     e.preventDefault();
+    // Validate Age and Relationship before adding to household
     if (validateAgeRelation()){
       household_array = addPerson(household_array);
       updateHousehold(household_array);
@@ -89,6 +91,7 @@ function run() {
     debugEl.appendChild(code);
     console.log("Value: ",debugEl.value);
   }
+  // Add click handler to submit button
   var submitEl = document.querySelector("button[type='submit']");
   submitEl.addEventListener("click", function (e) {
     e.preventDefault();
